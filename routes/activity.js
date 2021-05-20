@@ -1,3 +1,5 @@
+var http = require('https');
+
 function  performRequest(endpoint,host,headers, method, data, success) {
     var dataString = JSON.stringify(data);
     
