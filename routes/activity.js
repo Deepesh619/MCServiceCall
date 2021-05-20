@@ -39,13 +39,15 @@ function  performRequest(endpoint,host,headers, method, data, success) {
     'Content-Type': 'application/json'
   };
   var postMethod="POST";
-exports.getToken = function (req, res) {
+exports.getDEList = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     performRequest(authEndpoint,authHost,authHeaders, postMethod, authData, function(data) {
        var accesstoken = data.access_token;
     res.setHeader('Access-Control-Allow-Origin','*');
-    res.send(200, 'Publish1' + accesstoken);
+    res.send(200, accesstoken);
     console.log('Published1');
     });
     
 };
+
+

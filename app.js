@@ -12,7 +12,7 @@ app.set('port', process.env.PORT || 3000);
 
 //app.use(express.static(path.join(__dirname, 'public')));
 // Custom Hello World Activity Routes
-app.post('/MCService/getToken/', activity.getToken );
+app.post('/MCService/getDEList/', activity.getDEList );
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
