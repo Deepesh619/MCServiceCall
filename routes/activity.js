@@ -32,8 +32,8 @@ function  performRequest(endpoint,host,headers, method, data, success) {
   var authEndpoint = '/v2/token';
   var authData = {
     "grant_type": "client_credentials",
-    "client_id": "process.env.clientId",
-    "client_secret":"process.env.clientSecret"
+    "client_id": "1ye7xpmi31xwlu7xotjkauyv",
+    "client_secret":"Z3bAfZPzvGM05d7cu05RVTmx"
   };
   var authHeaders = {
     'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ exports.getToken = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     performRequest(authEndpoint,authHost,authHeaders, postMethod, authData, function(data) {
        var accesstoken = data.access_token;
-        res.setHeader('Access-Control-Allow-Origin','*');
+    res.setHeader('Access-Control-Allow-Origin','*');
     res.send(200, 'Publish1' + accesstoken);
     console.log('Published1');
     });
