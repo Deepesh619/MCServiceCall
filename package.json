@@ -1,0 +1,22 @@
+{
+  "name": "mcservicecall",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Deepesh619/MCServiceCall.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Deepesh619/MCServiceCall/issues"
+  },
+  "homepage": "https://github.com/Deepesh619/MCServiceCall#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
