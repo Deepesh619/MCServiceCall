@@ -43,7 +43,7 @@ exports.getDEList = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     performRequest(authEndpoint,authHost,authHeaders, postMethod, authData, function(data) {
        var accesstoken = data.access_token;
-    res.setHeader('Access-Control-Allow-Origin','http://localhost:3000/');
+    res.setHeader('Access-Control-Allow-Origin','http://localhost:3000');
     res.send(200, accesstoken);
     console.log('Published1');
     });
