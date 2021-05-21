@@ -73,7 +73,7 @@ exports.getDEList = function (req, res) {
 exports.getColumnList = function (req, res) {
   var body = "";
   req.on('data', function (chunk) {
-    body += chunk;
+    body = chunk;
   });
   req.on('end', function () {
     var DEName = JSON.parse(body).DEName;
