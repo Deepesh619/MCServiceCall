@@ -77,6 +77,7 @@ exports.getColumnList = function (req, res) {
   });
   req.on('end', function () {
     var DEName = JSON.parse(body).DEName;
+    console.log('DEName is : ' + DEName);
     performRequest(authHeaders, postMethod, JSON.stringify(authData),authURL, function(data) {
       var parsedData = JSON.parse(data);
     var accesstoken = parsedData.access_token;
