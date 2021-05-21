@@ -71,7 +71,7 @@ exports.getDEList = function (req, res) {
 };
 
 exports.getColumnList = function (req, res) {
-  console.log('Request is : ');
+  console.log('Request is : ' + req.stringify);
   performRequest(authHeaders, postMethod, JSON.stringify(authData),authURL, function(data) {
       var parsedData = JSON.parse(data);
     var accesstoken = parsedData.access_token;
