@@ -80,7 +80,7 @@ exports.getColumnList = function (req, res) {
     '<SimpleOperator>equals</SimpleOperator>' +
     '<Value>' + req.body.DEName + '</Value></Filter>';
  
-    var soapPayload = soapPayloadText1 + accesstoken + soapPayloadText2 + DEObjectType + soapPayloadText3 + filter + soapPayloadText4;
+    var soapPayload = soapPayloadText1 + accesstoken + soapPayloadText2 + DEFieldObjectType + soapPayloadText3 + filter + soapPayloadText4;
     performRequest(soapHeaders, postMethod, soapPayload,soapURL, function(data) {
         parseString(data, function (err, result) {              
             //console.log((result));             
