@@ -73,9 +73,7 @@ exports.getDEList = function (req, res) {
 exports.getColumnList = function (req, res) {
   var body = "";
   req.on('data', function (chunk) {
-    body = chunk;
-  });
-  req.on('end', function () {
+    body = chunk; 
     var DEName = JSON.parse(body).DEName;
     console.log('DEName is : ' + DEName);
     performRequest(authHeaders, postMethod, JSON.stringify(authData),authURL, function(data) {
@@ -94,6 +92,7 @@ exports.getColumnList = function (req, res) {
             var x = result['soap:Envelope']['soap:Body'][0].RetrieveResponseMsg[0].Results;
             var length = Object.keys(x).length;
             console.log(JSON.stringify(length));
+            var colListValue = [];
             for(var j = 0 ; j< length;j++){
                 colListValue.push(x[j].Name[0]);
              // console.log(x[j].Name + '\n');
