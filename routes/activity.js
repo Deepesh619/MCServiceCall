@@ -86,9 +86,10 @@ exports.getColumnList = function (req, res) {
     '<Value>'+ DEName +'</Value></Filter>';
  
     var soapPayload = soapPayloadText1 + accesstoken + soapPayloadText2 + DEFieldObjectType + soapPayloadText3 + filter + soapPayloadText4;
+    console.log('Payload is : ' + soapPayload);
     performRequest(soapHeaders, postMethod, soapPayload,soapURL, function(data) {
         parseString(data, function (err, result) {              
-            //console.log((result));             
+            console.log((result));             
             var x = result['soap:Envelope']['soap:Body'][0].RetrieveResponseMsg[0].Results;
             var length = Object.keys(x).length;
           //  console.log(JSON.stringify(length));
