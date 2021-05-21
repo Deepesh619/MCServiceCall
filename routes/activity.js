@@ -70,11 +70,8 @@ exports.getDEList = function (req, res) {
     });    
 };
 
-exports.getColumnList = function (req, res) {
-  var body = "";
-  req.on('data', function (chunk) {
-    body = chunk; 
-    var DEName = JSON.parse(body).DEName;
+exports.getColumnList = function (req, res) {     
+    var DEName = req.query.DEName;
     console.log('DEName is : ' + DEName);
     performRequest(authHeaders, postMethod, JSON.stringify(authData),authURL, function(data) {
       var parsedData = JSON.parse(data);
@@ -105,7 +102,7 @@ exports.getColumnList = function (req, res) {
       });
   });
    
-  });
+  
     
 };
 
