@@ -71,14 +71,19 @@ exports.getDEList = function (req, res) {
 };
 
 exports.getColumnList = function (req, res) {
-  console.log('Request is : ' + req.stringify);
-  performRequest(authHeaders, postMethod, JSON.stringify(authData),authURL, function(data) {
+  var body = "";
+  req.on('data', function (chunk) {
+    body += chunk;
+  });
+  req.on('end', function () {
+    var DEName = JSON.parse(body).DEName;
+    performRequest(authHeaders, postMethod, JSON.stringify(authData),authURL, function(data) {
       var parsedData = JSON.parse(data);
     var accesstoken = parsedData.access_token;
     var filter = ' <Filter xsi:type="SimpleFilterPart"> '+
     '<Property>DataExtension.CustomerKey</Property> '+
     '<SimpleOperator>equals</SimpleOperator>' +
-    '<Value>06AE4ABE-B8E1-49E7-BF3E-D8C72B5ADA38</Value></Filter>';
+    '<Value>'+ DEName +'</Value></Filter>';
  
     var soapPayload = soapPayloadText1 + accesstoken + soapPayloadText2 + DEFieldObjectType + soapPayloadText3 + filter + soapPayloadText4;
     performRequest(soapHeaders, postMethod, soapPayload,soapURL, function(data) {
@@ -97,7 +102,10 @@ exports.getColumnList = function (req, res) {
             console.log('Published');
            });
       });
-  });    
+  });
+   
+  });
+    
 };
 
 
