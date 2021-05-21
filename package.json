@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/Deepesh619/MCServiceCall#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "xml2js": "^0.4.23"
   }
 }
