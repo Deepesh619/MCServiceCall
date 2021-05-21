@@ -7,7 +7,7 @@ var soapHeaders = {
     'Content-Type': 'text/xml',
     'SOAPAction' : 'Retrieve'
   }
-const soapURL = "https://mcllzpmqql69yd9kvcz1n-mj1fqy.soap.marketingcloudapis.com/Service.asmx";
+const soapURL = process.env.soapURL;
 var soapPayloadPrefix = '<?xml version="1.0" encoding="UTF-8"?>'+
     '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" '+ 'xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"> '+
      '  <s:Header>'+
@@ -32,11 +32,11 @@ var soapPayloadPrefix = '<?xml version="1.0" encoding="UTF-8"?>'+
   };
   var authData = {
     "grant_type": "client_credentials",
-    "client_id": "1ye7xpmi31xwlu7xotjkauyv",
-    "client_secret":"Z3bAfZPzvGM05d7cu05RVTmx"
+    "client_id": process.env.clientId,
+  "client_secret":process.env.clientSecret
   };
 var postMethod='POST';
-const authURL = "https://mcllzpmqql69yd9kvcz1n-mj1fqy.auth.marketingcloudapis.com/v2/token";
+const authURL = process.env.authURL;
 var myDEListKey = [];
 var myDEListValue = []; 
 var myDEList = {}; 
@@ -59,9 +59,9 @@ exports.getDEList = function (req, res) {
                // console.log(x[j].Name + '\n');
               }
               console.log(myDEList);
-              res.setHeader('Access-Control-Allow-Origin','http://localhost:3000');
+              res.setHeader('Access-Control-Allow-Origin',process.env.whiteListedURL);
               res.send(200, myDEList);
-              console.log('Published1');
+              console.log('Published');
              });
         });
     });    
