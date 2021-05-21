@@ -51,14 +51,14 @@ exports.getDEList = function (req, res) {
               //console.log((result));             
               var x = result['soap:Envelope']['soap:Body'][0].RetrieveResponseMsg[0].Results;
               var length = Object.keys(x).length;
-              console.log(JSON.stringify(length));
+            //  console.log(JSON.stringify(length));
               for(var j = 0 ; j< length;j++){
                   myDEListKey.push(x[j].CustomerKey[0]);
                   myDEListValue.push(x[j].Name[0]);
                   myDEList[myDEListKey[j]] = myDEListValue[j];
                // console.log(x[j].Name + '\n');
               }
-              console.log(myDEList);
+             // console.log(myDEList);
               res.setHeader('Access-Control-Allow-Origin',process.env.whiteListedURL);
               res.send(200, myDEList);
               console.log('Published');
