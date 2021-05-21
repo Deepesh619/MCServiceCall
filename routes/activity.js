@@ -92,7 +92,7 @@ exports.getColumnList = function (req, res) {
             console.log((result));             
             var x = result['soap:Envelope']['soap:Body'][0].RetrieveResponseMsg[0].Results;
             var length = Object.keys(x).length;
-          //  console.log(JSON.stringify(length));
+            console.log(JSON.stringify(length));
             for(var j = 0 ; j< length;j++){
                 colListValue.push(x[j].Name[0]);
              // console.log(x[j].Name + '\n');
