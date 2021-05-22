@@ -76,7 +76,7 @@ exports.getColumnList = function (req, res) {
     performRequest(authHeaders, postMethod, JSON.stringify(authData),authURL, function(data) {
       var parsedData = JSON.parse(data);
     var accesstoken = parsedData.access_token;
-    var filter = ' <Filter xsi:type="SimpleFilterPart"> '+
+    var filter = ' <Filter xsi:type="SimpleFilterPart">  '+
     '<Property>DataExtension.CustomerKey</Property> '+
     '<SimpleOperator>equals</SimpleOperator>' +
     '<Value>'+ DEName +'</Value></Filter>';
