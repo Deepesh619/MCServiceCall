@@ -71,16 +71,50 @@ exports.getDEList = function (req, res) {
 };
 
 exports.getColumnList = function (req, res) {     
+    var ID = req.query.ID;
     var DEName = req.query.DEName;
     console.log('DEName is : ' + DEName);
+    console.log('ID is : ' + ID);
     performRequest(authHeaders, postMethod, JSON.stringify(authData),authURL, function(data) {
       var parsedData = JSON.parse(data);
     var accesstoken = parsedData.access_token;
+    if(DEName == 'false'){
+      var Objectfilter = ' <Filter xsi:type="SimpleFilterPart">  '+
+      '<Property>ObjectID</Property> '+
+      '<SimpleOperator>equals</SimpleOperator>' +
+      '<Value>'+ ID +'</Value></Filter>'; 
+      var soapPayload = soapPayloadText1 + accesstoken + soapPayloadText2 + DEObjectType + soapPayloadText3 + Objectfilter + soapPayloadText4;  
+      performRequest(soapHeaders, postMethod, soapPayload,soapURL, function(data) {
+        parseString(data, function (err, result) {                        
+          var customerKey = result['soap:Envelope']['soap:Body'][0].RetrieveResponseMsg[0].Results[0].CustomerKey;
+          var filter = ' <Filter xsi:type="SimpleFilterPart">  '+
+          '<Property>DataExtension.CustomerKey</Property> '+
+          '<SimpleOperator>equals</SimpleOperator>' +
+          '<Value>'+ customerKey +'</Value></Filter>'; 
+          soapPayload = soapPayloadText1 + accesstoken + soapPayloadText2 + DEFieldObjectType + soapPayloadText3 + filter + soapPayloadText4;
+    console.log('Payload is : ' + soapPayload);
+    performRequest(soapHeaders, postMethod, soapPayload,soapURL, function(data) {
+        parseString(data, function (err, result) {              
+            console.log((result));             
+            var x = result['soap:Envelope']['soap:Body'][0].RetrieveResponseMsg[0].Results;
+            var length = Object.keys(x).length;
+            console.log(JSON.stringify(length));
+            var colListValue = [];
+            for(var j = 0 ; j< length;j++){
+                colListValue.push(x[j].Name[0]);
+            }
+            res.setHeader('Access-Control-Allow-Origin',process.env.whiteListedURL);
+            res.send(200, colListValue);
+            console.log('Published');
+           });
+      });
+        });
+      });
+    }else{
     var filter = ' <Filter xsi:type="SimpleFilterPart">  '+
     '<Property>DataExtension.CustomerKey</Property> '+
     '<SimpleOperator>equals</SimpleOperator>' +
-    '<Value>'+ DEName +'</Value></Filter>';
- 
+    '<Value>'+ ID +'</Value></Filter>'; 
     var soapPayload = soapPayloadText1 + accesstoken + soapPayloadText2 + DEFieldObjectType + soapPayloadText3 + filter + soapPayloadText4;
     console.log('Payload is : ' + soapPayload);
     performRequest(soapHeaders, postMethod, soapPayload,soapURL, function(data) {
@@ -92,18 +126,14 @@ exports.getColumnList = function (req, res) {
             var colListValue = [];
             for(var j = 0 ; j< length;j++){
                 colListValue.push(x[j].Name[0]);
-             // console.log(x[j].Name + '\n');
             }
-           // console.log(myDEList);
             res.setHeader('Access-Control-Allow-Origin',process.env.whiteListedURL);
             res.send(200, colListValue);
             console.log('Published');
            });
       });
-  });
-   
-  
-    
+    }
+  });    
 };
 
 
