@@ -41,7 +41,7 @@ var postMethod='POST';
 const authURL = process.env.authURL;
 var myDEListKey = [];
 var myDEListValue = []; 
-var colListValue = []; 
+//var colListValue = []; 
 var myDEList = {}; 
 
 exports.getDEList = function (req, res) {
