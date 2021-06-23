@@ -51,22 +51,22 @@ exports.getDEList = function (req, res) {
       var soapPayload = soapPayloadText1 + accesstoken + soapPayloadText2 + DEObjectType + soapPayloadText3 + soapPayloadText4;
       performRequest(soapHeaders, postMethod, soapPayload,soapURL, function(data) {
           parseString(data, function (err, result) {              
-              console.log(JSON.stringify(result));             
+             // console.log(JSON.stringify(result));             
               var x = result['soap:Envelope']['soap:Body'][0].RetrieveResponseMsg[0].Results;
               var length = Object.keys(x).length;
               myDEListKey = [];
               myDEListValue =[];
               myDEList={};
-              console.log(JSON.stringify(length));
+             // console.log(JSON.stringify(length));
               for(var j = 0 ; j< length;j++){
                   myDEListKey.push(x[j].CustomerKey[0]);
                   myDEListValue.push(x[j].Name[0]);
                   myDEList[myDEListKey[j]] = myDEListValue[j];
                // console.log(x[j].Name + '\n');
               }
-              console.log(myDEList);
+             // console.log(myDEList);
               res.setHeader('Access-Control-Allow-Origin',process.env.whiteListedURL);
-              res.setHeader('Cache-Control','private, max-age=0,no-store');              
+             // res.setHeader('Cache-Control','private, max-age=0,no-store');              
               res.send(200, myDEList);
               console.log('Published');
              });
@@ -77,8 +77,8 @@ exports.getDEList = function (req, res) {
 exports.getColumnList = function (req, res) {     
     var ID = req.query.ID;
     var DEName = req.query.DEName;
-    console.log('DEName is : ' + DEName);
-    console.log('ID is : ' + ID);
+   // console.log('DEName is : ' + DEName);
+   // console.log('ID is : ' + ID);
     performRequest(authHeaders, postMethod, JSON.stringify(authData),authURL, function(data) {
       var parsedData = JSON.parse(data);
     var accesstoken = parsedData.access_token;
@@ -96,13 +96,13 @@ exports.getColumnList = function (req, res) {
           '<SimpleOperator>equals</SimpleOperator>' +
           '<Value>'+ customerKey +'</Value></Filter>'; 
           soapPayload = soapPayloadText1 + accesstoken + soapPayloadText2 + DEFieldObjectType + soapPayloadText3 + filter + soapPayloadText4;
-    console.log('Payload is : ' + soapPayload);
+    //console.log('Payload is : ' + soapPayload);
     performRequest(soapHeaders, postMethod, soapPayload,soapURL, function(data) {
         parseString(data, function (err, result) {              
-            console.log((result));             
+           // console.log((result));             
             var x = result['soap:Envelope']['soap:Body'][0].RetrieveResponseMsg[0].Results;
             var length = Object.keys(x).length;
-            console.log(JSON.stringify(length));
+           // console.log(JSON.stringify(length));
             var colListValue = [];
             for(var j = 0 ; j< length;j++){
                 colListValue.push(x[j].Name[0]);
@@ -120,13 +120,13 @@ exports.getColumnList = function (req, res) {
     '<SimpleOperator>equals</SimpleOperator>' +
     '<Value>'+ ID +'</Value></Filter>'; 
     var soapPayload = soapPayloadText1 + accesstoken + soapPayloadText2 + DEFieldObjectType + soapPayloadText3 + filter + soapPayloadText4;
-    console.log('Payload is : ' + soapPayload);
+   // console.log('Payload is : ' + soapPayload);
     performRequest(soapHeaders, postMethod, soapPayload,soapURL, function(data) {
         parseString(data, function (err, result) {              
-            console.log((result));             
+          //  console.log((result));             
             var x = result['soap:Envelope']['soap:Body'][0].RetrieveResponseMsg[0].Results;
             var length = Object.keys(x).length;
-            console.log(JSON.stringify(length));
+          //  console.log(JSON.stringify(length));
             var colListValue = [];
             for(var j = 0 ; j< length;j++){
                 colListValue.push(x[j].Name[0]);
