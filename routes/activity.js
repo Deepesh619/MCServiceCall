@@ -51,7 +51,7 @@ exports.getDEList = function (req, res) {
       var soapPayload = soapPayloadText1 + accesstoken + soapPayloadText2 + DEObjectType + soapPayloadText3 + soapPayloadText4;
       performRequest(soapHeaders, postMethod, soapPayload,soapURL, function(data) {
           parseString(data, function (err, result) {              
-              console.log((result));             
+             // console.log((result));             
               var x = result['soap:Envelope']['soap:Body'][0].RetrieveResponseMsg[0].Results;
               var length = Object.keys(x).length;
             //  console.log(JSON.stringify(length));
@@ -61,7 +61,7 @@ exports.getDEList = function (req, res) {
                   myDEList[myDEListKey[j]] = myDEListValue[j];
                // console.log(x[j].Name + '\n');
               }
-             // console.log(myDEList);
+              console.log(myDEList);
               res.setHeader('Access-Control-Allow-Origin',process.env.whiteListedURL);
               res.send(200, myDEList);
               console.log('Published');
