@@ -54,6 +54,9 @@ exports.getDEList = function (req, res) {
               console.log(JSON.stringify(result));             
               var x = result['soap:Envelope']['soap:Body'][0].RetrieveResponseMsg[0].Results;
               var length = Object.keys(x).length;
+              myDEListKey = [];
+              myDEListValue =[];
+              myDEList={};
               console.log(JSON.stringify(length));
               for(var j = 0 ; j< length;j++){
                   myDEListKey.push(x[j].CustomerKey[0]);
