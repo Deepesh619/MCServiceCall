@@ -63,6 +63,7 @@ exports.getDEList = function (req, res) {
               }
               console.log(myDEList);
               res.setHeader('Access-Control-Allow-Origin',process.env.whiteListedURL);
+              res.setHeader('Cache-Control','private, max-age=0,no-store');              
               res.send(200, myDEList);
               console.log('Published');
              });
